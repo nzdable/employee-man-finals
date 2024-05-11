@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between align-items-center pb-2 mb-3 border-bottom">
+  <h1 class="h2">Salary List</h1>
+  <a href="/addSalary" class="btn btn-primary">Add New Salary</a>
+</div>
+
+<!-- Salary table -->
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Employee Name</th>
+        <th scope="col">Salary</th>
+        <th scope="col">Date Added</th>
+        <th scope="col" class="text-end">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <% salaries.forEach(salary => { %>
+        <tr>
+          <td><%= salary.employeeName %></td>
+          <td><%= salary.basicPay %></td> <!-- assuming basicPay represents the salary, adjust as necessary -->
+          <td><%= salary.payrollDate.toDateString() %></td> <!-- format the date for better readability -->
+          <td class="text-end">
+            <div class="d-flex flex-row justify-content-end gap-2">
+              <!-- Update href to match the correct route for viewing salary details -->
+              <a href="/viewSalary/<%= salary._id %>" class="btn btn-primary btn-small"><i class="bi bi-eye"></i></a>
+              <a href="/editSalary/<%= salary._id %>" class="btn btn-warning btn-small"><i class="bi bi-pencil"></i></a>
+              <form action="/deleteSalary/<%= salary._id %>" method="POST" class="position-relative">
+                <button type="submit" class="btn btn-danger btn-small"><i class="bi bi-trash"></i></button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</div>

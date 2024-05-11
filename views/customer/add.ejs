@@ -1,0 +1,143 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Employee</h1>
+  <div class="btn-toolbar mb-2 mb-md 0">
+    <div class="btn-group me-2">
+      <button class="btn btn-sm btn-outline-secondary">?</button>
+    </div>
+  </div>
+</div>
+
+<div class="col py-3">
+  <div class="row">
+    <div class="col">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+          <li class="breadcrumb-item active">New Employee</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col text-end fw-lighter">
+      <b>EmployeeId</b>
+    </div>
+  </div>
+
+</div>
+
+
+<form action="/add" method="POST">
+  
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" value="" placeholder="First Name" required>
+    </div>
+    <div class="col">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" value="" placeholder="Last Name">
+    </div>
+  </div>
+  <!-- Other form fields -->
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="addressLine">Address Line</label>
+      <input type="text" class="form-control" id="addressLine" name="addressLine" value="" placeholder="Address Line">
+    </div>
+    <div class="col">
+      <label for="barangay">Barangay</label>
+      <input type="text" class="form-control" id="barangay" name="barangay" value="" placeholder="Barangay">
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="city">City/Municipality</label>
+      <input type="text" class="form-control" id="city" name="city" value="" placeholder="City/Municipality">
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="province">Province</label>
+      <input type="text" class="form-control" id="province" name="province" value="" placeholder="Province">
+    </div>
+
+    <div class="col">
+      <label for="country">Country</label>
+      <input type="text" class="form-control" id="country" name="country" value="" placeholder="Country">
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col"
+      <label for="zipcode">Zipcode</label>
+      <input type="text" class="form-control" id="zipcode" name="zipcode" value="" placeholder="Zipcode">
+    </div>
+  </div>
+
+<!-- Other form fields -->
+
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="tel">Telephone</label>
+      <input type="text" class="form-control" id="tel" name="tel" value="" placeholder="Telephone">
+    </div>
+    <div class="col">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" name="email" value="" placeholder="Email">
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="department">Department</label>
+      <select class="form-control" id="department" name="department">
+        <option value="">Select Department</option>
+        <option value="IT">IT</option>
+        <option value="Sales">Sales</option>
+        <!-- Add more options as needed -->
+    </select>
+    </div>
+
+    <div class="col">
+      <label for="destination">Status</label>
+      <select class="form-control" id="destination" name="destination">
+        <option value="">Select Status</option>
+        <option value="Active">Active</option>
+        <option value="Resigned">Resigned</option>
+        <option value="Awol">Awol</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+
+    
+      <div class="col">
+        <label for="position">Position</label>
+        <select class="form-control" id="position" name="position">
+          <option value="">Select Position</option>
+          <option value="Manager">Manager</option>
+          <option value="Senior Developer">Senior Developer</option>
+          <option value="Junior Developer">Junior Developer</option>
+          <!-- Add more options as needed -->
+      </select>
+      </div>
+
+    <div class="col">
+      <label for="type">Employee Type</label>
+      <select class="form-control" id="type" name="type">
+        <option value="">Select Employee Type</option>
+        <option value="PartTime">Active</option>
+        <option value="PartTime">Part Time</option>
+        <option value="Probation">Probation</option>
+        <option value="Resigned">Resigned</option>
+        <!-- Add more options as needed -->
+      </select>
+    </div>
+
+  <div class="form-group mb-4">
+    <br>
+    <button type="submit" class="btn btn-primary">Add New Employee</button>
+  </div>
+</form>

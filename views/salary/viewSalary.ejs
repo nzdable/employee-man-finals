@@ -1,0 +1,200 @@
+<div class="container">
+  <h1 class="h2">View Salary</h1>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+      <li class="breadcrumb-item active">View Salary</li>
+    </ol>
+  </nav>
+<h1>Official Payslip</h1>
+
+<style>
+  #col1 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+    column-gap: 40px;
+  }
+
+  #col2 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+  #col3 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+  #col4 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+  #row3 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+  #col10 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+  #col11 {
+    border: 1px solid black; /* You can customize the border width and color */
+    padding: 10px; /* Optional: Add padding for spacing between content and border */
+    box-sizing: border-box;
+  }
+
+
+</style>
+
+
+<div class="row" id="row1">
+  <div class = "col-6" id="col1">
+    <p><strong>Employee Name:</strong> <%= salary.employeeName %></p>
+    <p><strong>Starting Cutoff Date:</strong> <%= salary.startingCutoff.toDateString() %></p>
+    <p><strong>Ending Cutoff Date:</strong> <%= salary.endingCutoff.toDateString() %></p>
+    <p><strong>TIN No.:</strong> <%= salary.tin %></p>
+    <p><strong>SSS No.:</strong> <%= salary.sss %></p>
+    <p><strong>PHILHEALTH No.:</strong> <%= salary.philhealth %></p>
+    <p><strong>HDMF No.:</strong> <%= salary.hdmf %></p>
+    <br>
+  </div>
+
+  <div class = "col-6" id="col2">
+    <p><strong>Payroll Date:</strong> </p>
+    <p><strong>Pay Period:</strong> </p>
+    <p><strong>Department: </strong> </p>
+    <p><strong>Date of Hire: </strong> </p>
+    <p><strong>Net Hourly Rate Of: </strong> </p>
+    <br>
+  </div>
+</div>
+
+    <div class="row" id="row2">
+      <div class="col-6" id="col3">
+        <p><b>COMPENSATION</b></p>
+        <p><strong>Basic Pay:</strong> <%= salary.basicPay %></p>
+        <p><strong>Night Differential:</strong> <%= salary.nightDiff %></p>
+        <p><strong>Overtime Pay:</strong> <%= salary.overtimePay %></p>
+        <p><strong>Holiday Pay:</strong> <%= salary.holidayPay %></p>
+        <p><strong>Internet Allowance:</strong> <%= salary.internetAllowance %></p>
+
+        <p><b>OTHERS</b></p>
+        <p><strong>Attendance Incentive:</strong> <%= salary.attendanceIncentive %></p>
+        <p><strong>Other Bonuses:</strong> <%= salary.otherBonuses %></p>
+        <p>-------------------------</p>
+        <p><strong>Total Compensation:</strong> <%= salary.totalCompensation %></p>
+        <br>
+        <p><strong>Total Net Pay:</strong> <%= salary.totalNetPay %></p>
+        </p>
+        <br>
+      </div>
+
+      <div class="col-6" id = "col4">
+        <p><b>DEDUCTIONS</b></p>
+        <p><strong>Withholding tax:</strong> </p>
+        <p><strong>SSS:</strong> </p>
+        <p><strong>PhilHealth:</strong> </p>
+        <p><strong>HDMF:</strong> </p>
+        <p><strong>SSS Loan Salary:</strong> </p>
+        <p><strong>SSS Loan Calamity:</strong> </p>
+        <p><strong>HMDF Loan Salary:</strong> </p>
+        <p><strong>HDMF Loan Calamity:</strong> </p>
+        <br>
+        <p><strong>Total Deductions:</strong> <%= salary.totalDeductions %></p>
+        <br>
+      </div>
+    </div>
+  
+<div class="row" id="row3">
+  <div class="col-6" id="col5">
+    <p><strong>Hours Worked:</strong> <%= salary.hoursWorked %></p>
+    <p><strong>Regular Overtime:</strong> <%= salary.regularOvertime %></p>
+    <p><strong>Regular Holiday:</strong> <%= salary.regularHoliday %></p>
+    <p><strong>Special Non-Working Day:</strong> <%= salary.specialNonWorkingDay %></p>
+    <p><strong>Holiday Overtime:</strong> <%= salary.holidayOvertime %></p>
+    <p><strong>Service Incentive Leave Credit:</strong> <%= salary.serviceIncentiveLeaveCredit %></p>
+    <p>------------------------------------------</p>
+    <p><strong>Gross Pay Rate:</strong> <%= salary.grossPayRate %></p>
+    <p><strong>Gross Rate per Hour:</strong> <%= salary.grossRatePerHour %></p>
+    <p><strong>Gross Salary Dollars:</strong> <%= salary.grossSalaryDollars %></p>
+    <p><strong>Gross Salary Pesos:</strong> <%= salary.grossSalaryPesos %></p>
+    <p><strong>Internet Allowance and Bonuses:</strong> <%= salary.internetAllowanceBonuses %></p>
+    <p>------------------------------------------</p>
+    <p><strong>Total Gross Compensation:</strong> <%= salary.totalGrossCompensation %></p>
+  </div>
+
+  <div class="col-6" id="col6">
+    <p><strong>ACTUAL</strong></p>
+    <p><%= salary.hoursWorked %></p>
+  </div>
+
+  <div class="col-6" id="col7">
+    <p><strong>HOURS WORKED</strong></p>
+    <p><%= salary.hoursWorked %></p>
+  </div>
+
+  <div class="col-6" id="col8">
+    <p><strong>FACTOR</strong></p>
+    <p><%= salary.hoursWorked %></p>
+  </div>
+
+  <div class="col-6" id="col9">
+    <p><strong>HOURLY RATE</strong></p>
+    <p><%= salary.hoursWorked %></p>
+  </div>
+</div>
+
+<div class="row4">
+  <div class="row">
+    <div class="col-6" id="col10">
+      <p><b>YEAR TO DATE COMPENSATION</b></p>
+      <p><strong>Basic Pay:</strong> </p>
+      <p><strong>Night Differential:</strong> </p>
+      <p><strong>Overtime Pay:</strong> </p>
+      <p><strong>Holiday Pay:</strong> </p>
+      <p><strong>Internet Allowance:</strong> </p>
+      <p><strong>Attendance Incentive:</strong> </p>
+      <p><strong>Other Bonuses:</strong> </p>
+      <br><br><br>
+      <p><strong>Year To Date Compensation:</strong> <%= salary.yearToDateCompensation %></p>
+      <p><strong>Year To Date Deductions:</strong> <%= salary.yearToDateDeductions %></p>
+      <p><strong>Year To Date Gross Pay:</strong> <%= salary.yearToDateGrossPay %></p>
+      <p><strong>Year To Date Net Pay:</strong> <%= salary.yearToDateNetPay %></p>
+      </p>
+    </div>
+
+    <div class="col-6" id="col11">
+      <p><b>YEAR TO DATE DEDUCTIONS</b></p>
+      <p><strong>Withholding tax:</strong> </p>
+      <p><strong>SSS:</strong> </p>
+      <p><strong>PhilHealth:</strong> </p>
+      <p><strong>HDMF:</strong> </p>
+      <p><strong>SSS Loan Salary:</strong> </p>
+      <p><strong>SSS Loan Calamity:</strong> </p>
+      <p><strong>HMDF Loan Salary:</strong> </p>
+      <p><strong>HDMF Loan Calamity:</strong> </p>
+      <br><br><br>
+      <p><strong>Year To Date Compensation:</strong> <%= salary.yearToDateCompensation %></p>
+      <p><strong>Year To Date Deductions:</strong> <%= salary.yearToDateDeductions %></p>
+      <p><strong>Year To Date Gross Pay:</strong> <%= salary.yearToDateGrossPay %></p>
+      <p><strong>Year To Date Net Pay:</strong> <%= salary.yearToDateNetPay %></p>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+
+
+  </div>
+</div>
+

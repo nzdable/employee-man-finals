@@ -1,0 +1,47 @@
+<!-- leave.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Information</title>
+</head>
+
+<body>
+  <h1>Leave Information</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Signatory</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Action</th> <!-- Add Action column for edit button -->
+      </tr>
+    </thead>
+    <tbody>
+      <% leaveRequests.forEach(leave => { %>
+        <tr>
+          <td><%= leave.employeeName %></td>
+          <td><%= leave.superiorName %></td>
+          <td><%= leave.leaveType %></td>
+          <td><%= leave.leaveStatus %></td>
+          <td><%= leave.startDate %></td>
+          <td><%= leave.endDate %></td>
+          <td>
+            <form action="/leave/<%= leave._id %>/edit" method="GET"> <!-- Add edit form -->
+              <button type="submit">Edit</button>
+            </form>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>    
+  </table>
+</body>
+
+</html>

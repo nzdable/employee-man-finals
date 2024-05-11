@@ -1,0 +1,41 @@
+<!-- editLeave.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Leave</title>
+</head>
+
+<body>
+  <h1>Edit Leave</h1>
+
+  <form action="/leave/<%= leave._id %>/edit" method="POST"> <!-- Ensure correct form action -->
+    <!-- Include leave details in input fields for editing -->
+    <input type="text" name="employeeName" value="<%= leave.employeeName %>">
+    <input type="text" name="superiorName" value="<%= leave.superiorName %>">
+    <select name="leaveType"> <!-- Change input type to select -->
+      <option value="">Select Leave Type</option>
+      <option value="Vacation" <% if (leave.leaveType === 'Vacation') { %> selected <% } %>>Vacation</option>
+      <option value="Sick" <% if (leave.leaveType === 'Sick') { %> selected <% } %>>Sick</option>
+      <option value="Maternity" <% if (leave.leaveType === 'Maternity') { %> selected <% } %>>Maternity</option>
+      <option value="Paternity" <% if (leave.leaveType === 'Paternity') { %> selected <% } %>>Paternity</option>
+      <!-- Add more options as needed -->
+    </select>
+    <select name="leaveStatus"> <!-- Change input type to select -->
+      <option value="">Select Leave Status</option>
+      <option value="Approved" <% if (leave.leaveStatus === 'Approved') { %> selected <% } %>>Approved</option>
+      <option value="Rejected" <% if (leave.leaveStatus === 'Rejected') { %> selected <% } %>>Rejected</option>
+      <option value="Pending" <% if (leave.leaveStatus === 'Pending') { %> selected <% } %>>Pending</option>
+      <!-- Add more options as needed -->
+    </select>
+    <input type="date" name="startDate" value="<%= leave.startDate.toISOString().split('T')[0] %>">
+    <input type="date" name="endDate" value="<%= leave.endDate.toISOString().split('T')[0] %>">
+    <button type="submit">Update</button>
+  </form>
+  
+</body>
+
+</html>

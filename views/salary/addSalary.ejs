@@ -1,0 +1,296 @@
+<div class="d-flex justify-content-between flex-wrap flex-md nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Add Salary</h1>
+</div>
+
+<!-- Breadcrumb navigation -->
+<div class="col py-3">
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+          <li class="breadcrumb-item active">Add Salary</li>
+      </ol>
+  </nav>
+</div>
+
+<form id="salaryForm" action="/addSalary" method="POST">
+  <div class="row form-group mb-4">
+      <div class="col">
+          <label for="employeeName">Employee Name</label>
+          <select class="form-control" id="employeeName" name="employeeName"> 
+              <option value="">Select Employee</option>
+              <!-- Loop through customers to populate employee options -->
+              <% customers.forEach(customer => { %>
+                  <option value="<%= customer.firstName %> <%= customer.lastName %>"><%= customer.firstName %> <%= customer.lastName %> - <%= customer.department %></option> <!-- Update option value to employee name -->
+              <% }) %>
+          </select>
+      </div>
+  </div>
+
+  <!-- Payslip details -->
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="tin">TIN No.</label>
+      <input type="text" class="form-control" id="tin" name="tin" placeholder="Enter TIN No." required>
+    </div>
+    <div class="col">
+      <label for="sss">SSS No.</label>
+      <input type="text" class="form-control" id="sss" name="sss" placeholder="Enter SSS No." required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="philhealth">PHILHEALTH No.</label>
+      <input type="text" class="form-control" id="philhealth" name="philhealth" placeholder="Enter PHILHEALTH No." required>
+    </div>
+    <div class="col">
+      <label for="hdmf">HDMF No.</label>
+      <input type="text" class="form-control" id="hdmf" name="hdmf" placeholder="Enter HDMF No." required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+        <label for="startingCutoff">Starting Cutoff Date</label>
+        <input type="date" class="form-control" id="startingCutoff" name="startingCutoff" required>
+    </div>
+    <div class="col">
+        <label for="endingCutoff">Ending Cutoff Date</label>
+        <input type="date" class="form-control" id="endingCutoff" name="endingCutoff" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="basicPay">Basic Pay</label>
+      <input type="number" class="form-control" id="basicPay" name="basicPay" placeholder="Enter Basic Pay" required>
+    </div>
+    <div class="col">
+      <label for="nightDiff">Night Differential</label>
+      <input type="number" class="form-control" id="nightDiff" name="nightDiff" placeholder="Enter Night Differential" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="overtimePay">Overtime Pay</label>
+      <input type="number" class="form-control" id="overtimePay" name="overtimePay" placeholder="Enter Overtime Pay" required>
+    </div>
+    <div class="col">
+      <label for="holidayPay">Holiday Pay</label>
+      <input type="number" class="form-control" id="holidayPay" name="holidayPay" placeholder="Enter Holiday Pay" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="internetAllowance">Internet Allowance</label>
+      <input type="number" class="form-control" id="internetAllowance" name="internetAllowance" placeholder="Enter Internet Allowance" required>
+    </div>
+    <div class="col">
+      <label for="otherBonuses">Other Bonuses</label>
+      <input type="number" class="form-control" id="otherBonuses" name="otherBonuses" placeholder="Enter Other Bonuses" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="attendanceIncentive">Attendance Incentive</label>
+      <input type="number" class="form-control" id="attendanceIncentive" name="attendanceIncentive" placeholder="Enter Attendance Incentive" required>
+    </div>
+    <div class="col">
+      <label for="totalCompensation">Total Compensation</label>
+      <span id="grossPayRate" class="form-control">Auto-calculated</span>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="totalNetPay">Total Net Pay</label>
+      <span id="grossPayRate" class="form-control">Auto-calculated</span>
+    </div>
+    <div class="col">
+      <label for="hoursWorked">Hours Worked</label>
+      <input type="number" class="form-control" id="hoursWorked" name="hoursWorked" placeholder="Enter Hours Worked" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="regularOvertime">Regular Overtime</label>
+      <input type="number" class="form-control" id="regularOvertime" name="regularOvertime" placeholder="Enter Regular Overtime" required>
+    </div>
+    <div class="col">
+      <label for="regularHoliday">Regular Holiday</label>
+      <input type="number" class="form-control" id="regularHoliday" name="regularHoliday" placeholder="Enter Regular Holiday" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+        <label for="numberOfWorkingDays">Number of Working Days</label>
+        <input type="number" class="form-control" id="numberOfWorkingDays" name="numberOfWorkingDays" placeholder="Enter Number of Working Days" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="specialNonWorkingDay">Special Non-Working Day</label>
+      <input type="number" class="form-control" id="specialNonWorkingDay" name="specialNonWorkingDay" placeholder="Enter Special Non-Working Day" required>
+    </div>
+    <div class="col">
+      <label for="holidayOvertime">Holiday Overtime</label>
+      <input type="number" class="form-control" id="holidayOvertime" name="holidayOvertime" placeholder="Enter Holiday Overtime" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="serviceIncentiveLeaveCredit">Service Incentive Leave Credit</label>
+      <input type="number" class="form-control" id="serviceIncentiveLeaveCredit" name="serviceIncentiveLeaveCredit" placeholder="Enter Service Incentive Leave Credit" required>
+    </div>
+    <div class="col">
+      <label for="internetAllowanceBonuses">Internet Allowance and Bonuses</label>
+      <input type="number" class="form-control" id="internetAllowanceBonuses" name="internetAllowanceBonuses" placeholder="Enter Internet Allowance and Bonuses" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+        <label for="sssDeduction">SSS Deduction</label>
+        <input type="number" class="form-control" id="sssDeduction" name="sssDeduction" placeholder="Enter SSS Deduction" required>
+    </div>
+    <div class="col">
+        <label for="philhealthDeduction">PhilHealth Deduction</label>
+        <input type="number" class="form-control" id="philhealthDeduction" name="philhealthDeduction" placeholder="Enter PhilHealth Deduction" required>
+    </div>
+</div>
+
+<div class="row form-group mb-4">
+    <div class="col">
+        <label for="hdmfDeduction">HDMF Deduction</label>
+        <input type="number" class="form-control" id="hdmfDeduction" name="hdmfDeduction" placeholder="Enter HDMF Deduction" required>
+    </div>
+</div>
+
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="grossPayRate">Gross Pay Rate</label>
+      <span id="grossPayRate" class="form-control">Auto-calculated</span>
+    </div>
+    <div class="col">
+      <label for="grossSalaryDollars">Gross Salary Dollars</label>
+      <span id="grossSalaryDollars" class="form-control">Auto-calculated</span>
+    </div>
+</div>
+
+<div class="row form-group mb-4">
+    <div class="col">
+      <label for="grossSalaryPesos">Gross Salary Pesos</label>
+      <span id="grossSalaryPesos" class="form-control">Auto-calculated</span>
+    </div>
+</div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="totalGrossCompensation">Total Gross Compensation</label>
+      <input type="number" class="form-control" id="totalGrossCompensation" name="totalGrossCompensation" placeholder="Enter Total Gross Compensation" required>
+    </div>
+    <div class="col">
+      <label for="yearToDateCompensation">Year To Date Compensation</label>
+      <input type="number" class="form-control" id="yearToDateCompensation" name="yearToDateCompensation" placeholder="Enter Year To Date Compensation" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="yearToDateDeductions">Year To Date Deductions</label>
+      <input type="number" class="form-control" id="yearToDateDeductions" name="yearToDateDeductions" placeholder="Enter Year To Date Deductions" required>
+    </div>
+    <div class="col">
+      <label for="yearToDateGrossPay">Year To Date Gross Pay</label>
+      <input type="number" class="form-control" id="yearToDateGrossPay" name="yearToDateGrossPay" placeholder="Enter Year To Date Gross Pay" required>
+    </div>
+  </div>
+
+  <div class="row form-group mb-4">
+    <div class="col">
+      <label for="yearToDateNetPay">Year To Date Net Pay</label>
+      <input type="number" class="form-control" id="yearToDateNetPay" name="yearToDateNetPay" placeholder="Enter Year To Date Net Pay" required>
+    </div>
+  </div>
+
+  <label>Total Compensation:</label>
+  <span id="totalCompensation">0</span>
+
+  <label>Total Deductions:</label>
+  <span id="totalDeductions">0</span>
+
+  <label>Net Pay:</label>
+  <span id="netPay">0</span>
+
+  <div class="form-group mb-4">
+    <button type="submit" class="btn btn-primary" id="addSalaryBtn">Add Salary</button>
+  </div>
+</form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const basicPayInput = document.getElementById('basicPay');
+    const overtimePayInput = document.getElementById('overtimePay');
+    const holidayPayInput = document.getElementById('holidayPay');
+    const internetAllowanceInput = document.getElementById('internetAllowance');
+    const otherBonusesInput = document.getElementById('otherBonuses');
+
+    const sssDeductionInput = document.getElementById('sssDeduction');
+    const philhealthDeductionInput = document.getElementById('philhealthDeduction');
+    const hdmfDeductionInput = document.getElementById('hdmfDeduction');
+
+    const grossPayRateSpan = document.getElementById('grossPayRate');
+    const grossSalaryDollarsSpan = document.getElementById('grossSalaryDollars');
+    const grossSalaryPesosSpan = document.getElementById('grossSalaryPesos');
+    const totalNetPaySpan = document.getElementById('totalNetPay');
+
+    const compensationInputs = [basicPayInput, overtimePayInput, holidayPayInput, internetAllowanceInput, otherBonusesInput];
+    const deductionInputs = [sssDeductionInput, philhealthDeductionInput, hdmfDeductionInput];
+
+    compensationInputs.forEach(input => input.addEventListener('input', updateGrossValues));
+    deductionInputs.forEach(input => input.addEventListener('input', updateTotalNetPay));
+
+    function updateGrossValues() {
+      const basicPay = Number(basicPayInput.value) || 0;
+      const overtimePay = Number(overtimePayInput.value) || 0;
+      const holidayPay = Number(holidayPayInput.value) || 0;
+      const internetAllowance = Number(internetAllowanceInput.value) || 0;
+      const otherBonuses = Number(otherBonusesInput.value) || 0;
+
+      const totalCompensation = basicPay + overtimePay + holidayPay + internetAllowance + otherBonuses;
+      document.getElementById('totalCompensation').textContent = totalCompensation.toFixed(2);
+      
+      const grossPayRate = calculateGrossPayRate(basicPay); // Make sure this function is defined and accessible
+      grossPayRateSpan.textContent = grossPayRate.toFixed(2);
+
+      const grossSalaryDollars = totalCompensation / exchangeRate; // Ensure exchangeRate is defined
+      grossSalaryDollarsSpan.textContent = grossSalaryDollars.toFixed(2);
+
+      const grossSalaryPesos = totalCompensation; // Direct assignment if 1:1 ratio
+      grossSalaryPesosSpan.textContent = grossSalaryPesos.toFixed(2);
+  }
+
+
+    function updateTotalNetPay() {
+        const sssDeduction = Number(sssDeductionInput.value) || 0;
+        const philhealthDeduction = Number(philhealthDeductionInput.value) || 0;
+        const hdmfDeduction = Number(hdmfDeductionInput.value) || 0;
+
+        const totalDeductions = sssDeduction + philhealthDeduction + hdmfDeduction;
+        const totalCompensation = // Calculate total compensation here using the same logic as in updateGrossValues() function
+
+        totalNetPaySpan.textContent = (totalCompensation - totalDeductions).toFixed(2);
+    }
+  });
+</script>
+
+  
