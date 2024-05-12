@@ -59,8 +59,6 @@
 <div class="row" id="row1">
   <div class = "col-6" id="col1">
     <p><strong>Employee Name:</strong> <%= salary.employeeName %></p>
-    <p><strong>Starting Cutoff Date:</strong> <%= salary.startingCutoff.toDateString() %></p>
-    <p><strong>Ending Cutoff Date:</strong> <%= salary.endingCutoff.toDateString() %></p>
     <p><strong>TIN No.:</strong> <%= salary.tin %></p>
     <p><strong>SSS No.:</strong> <%= salary.sss %></p>
     <p><strong>PHILHEALTH No.:</strong> <%= salary.philhealth %></p>
@@ -69,10 +67,10 @@
   </div>
 
   <div class = "col-6" id="col2">
-    <p><strong>Payroll Date:</strong> </p>
-    <p><strong>Pay Period:</strong> </p>
-    <p><strong>Department: </strong> </p>
-    <p><strong>Date of Hire: </strong> </p>
+    <p><strong>Payroll Date:</strong> <%= salary.payrollDate %></p>
+    <p><strong>Pay Period:</strong> <%= salary.startingCutoff.toDateString() %> to <%= salary.endingCutoff.toDateString() %> </p>
+    <p><strong>Department: </strong><%= salary.department %></p>
+    <p><strong>Date of Hire: </strong><%= salary.dateOfHire %> </p>
     <p><strong>Net Hourly Rate Of: </strong> </p>
     <br>
   </div>
@@ -101,13 +99,13 @@
       <div class="col-6" id = "col4">
         <p><b>DEDUCTIONS</b></p>
         <p><strong>Withholding tax:</strong> <%= salary.whDeduction %></p>
-        <p><strong>SSS:</strong> </p>
-        <p><strong>PhilHealth:</strong> </p>
-        <p><strong>HDMF:</strong> </p>
-        <p><strong>SSS Loan Salary:</strong> </p>
-        <p><strong>SSS Loan Calamity:</strong> </p>
-        <p><strong>HMDF Loan Salary:</strong> </p>
-        <p><strong>HDMF Loan Calamity:</strong> </p>
+        <p><strong>SSS:</strong> <%= salary.sssDeduction %></p>
+        <p><strong>PhilHealth:</strong><%= salary.philhealthDeduction %> </p>
+        <p><strong>HDMF:</strong> <%= salary.hdmfDeduction %></p>
+        <p><strong>SSS Loan Salary:</strong> <%= salary.sssLoanSalary %> </p>
+        <p><strong>SSS Loan Calamity:</strong> <%= salary.sssLoanCalamity %> </p>
+        <p><strong>HMDF Loan Salary:</strong> <%= salary.hdmfLoanSalary %></p>
+        <p><strong>HDMF Loan Calamity:</strong> <%= salary.hdmfLoanCalamity %></p>
         <br>
         <p><strong>Total Deductions:</strong> <%= salary.totalDeductions %></p>
         <br>

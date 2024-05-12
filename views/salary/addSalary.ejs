@@ -3,6 +3,7 @@
 </div>
 
 <!-- Breadcrumb navigation -->
+
 <div class="col py-3">
   <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -12,8 +13,20 @@
   </nav>
 </div>
 
+<div class="row form-group mb-4">
+  <div class="col">
+      <label for="startingCutoff">Starting Cutoff Date</label>
+      <input type="date" class="form-control" id="startingCutoff" name="startingCutoff" required>
+  </div>
+  <div class="col">
+      <label for="endingCutoff">Ending Cutoff Date</label>
+      <input type="date" class="form-control" id="endingCutoff" name="endingCutoff" required>
+  </div>
+</div>  <br><br>
+
 <form id="salaryForm" action="/addSalary" method="POST">
-  <div class="row form-group mb-4">
+  <div class="row1">
+    <div class="col form-group mb-4">
       <div class="col">
           <label for="employeeName">Employee Name</label>
           <select class="form-control" id="employeeName" name="employeeName"> 
@@ -24,10 +37,43 @@
               <% }) %>
           </select>
       </div>
+    </div>
+
+    <div class="col form-group mb-4">
+      <div class="col">
+          <label for="department">Department</label>
+          <select class="form-control" id="department" name="department"> 
+              <option value="">Select Department</option>
+              <% 
+              // Assuming customers is an array of objects with a 'department' property
+              const uniqueDepartments = new Set();
+              customers.forEach(customer => {
+                  uniqueDepartments.add(customer.department);
+              });
+              uniqueDepartments.forEach(department => { %>
+                  <option value="<%= department %>"><%= department %></option>
+              <% }); %>
+          </select>
+      </div>
+    </div>
+
+    <div class="col form-group mb-4">
+    <div class="col">
+        <label for="createdAt">Date of Hire</label>
+        <select class="form-control" id="createdAt" name="createdAt"> 
+            <option value="">Select Date of Hire</option>
+            <% customers.forEach(customer => { %>
+                <option value="<%= customer.createdAt %>"><%= customer.createdAt %></option>
+            <% }) %>
+        </select>
+    </div>
   </div>
+  </div>
+  <br><br>
+
+
 
   <!-- Payslip details -->
-
   <div class="row form-group mb-4">
     <div class="col">
       <label for="tin">TIN No.</label>
@@ -52,14 +98,26 @@
 
   <div class="row form-group mb-4">
     <div class="col">
-        <label for="startingCutoff">Starting Cutoff Date</label>
-        <input type="date" class="form-control" id="startingCutoff" name="startingCutoff" required>
+      <label for="sssLoanSalary">SSS Loan Salary</label>
+      <input type="text" class="form-control" id="sssLoanSalary" name="sssLoanSalary" placeholder="Enter SSS Loan Salary Amount" required>
+    </div>
+
+    <div class="col">
+      <label for="sssLoanCalamity">SSS Loan Calamity</label>
+      <input type="text" class="form-control" id="sssLoanCalamity" name="sssLoanCalamity" placeholder="Enter SSS Loan Calamity Amount" required>
     </div>
     <div class="col">
-        <label for="endingCutoff">Ending Cutoff Date</label>
-        <input type="date" class="form-control" id="endingCutoff" name="endingCutoff" required>
+      <label for="hdmfLoanSalary">HDMF Loan Salary</label>
+      <input type="text" class="form-control" id="hdmfLoanSalary" name="hdmfLoanSalary" placeholder="Enter HMDF Loan Salary Amount" required>
     </div>
-  </div>
+
+    <div class="col">
+      <label for="hdmfLoanCalamity">HDMF Loan Calamity</label>
+      <input type="text" class="form-control" id="hdmfLoanCalamity" name="hdmfLoanCalamity" placeholder="Enter HDMF Loan Calamity Amount" required>
+    </div>
+  </div><br><br>
+
+
 
   <div class="row form-group mb-4">
     <div class="col">
@@ -157,22 +215,10 @@
   </div>
 
   <div class="row form-group mb-4">
-    <div class="col">
-        <label for="sssDeduction">SSS Deduction</label>
-        <input type="number" class="form-control" id="sssDeduction" name="sssDeduction" placeholder="Enter SSS Deduction" required>
-    </div>
-    <div class="col">
-        <label for="philhealthDeduction">PhilHealth Deduction</label>
-        <input type="number" class="form-control" id="philhealthDeduction" name="philhealthDeduction" placeholder="Enter PhilHealth Deduction" required>
-    </div>
+
+
 </div>
 
-<div class="row form-group mb-4">
-    <div class="col">
-        <label for="hdmfDeduction">HDMF Deduction</label>
-        <input type="number" class="form-control" id="hdmfDeduction" name="hdmfDeduction" placeholder="Enter HDMF Deduction" required>
-    </div>
-</div>
 
 
   <div class="row form-group mb-4">
@@ -244,17 +290,12 @@
     const internetAllowanceInput = document.getElementById('internetAllowance');
     const otherBonusesInput = document.getElementById('otherBonuses');
 
-    const sssDeductionInput = document.getElementById('sssDeduction');
-    const philhealthDeductionInput = document.getElementById('philhealthDeduction');
-    const hdmfDeductionInput = document.getElementById('hdmfDeduction');
-
     const grossPayRateSpan = document.getElementById('grossPayRate');
     const grossSalaryDollarsSpan = document.getElementById('grossSalaryDollars');
     const grossSalaryPesosSpan = document.getElementById('grossSalaryPesos');
     const totalNetPaySpan = document.getElementById('totalNetPay');
 
     const compensationInputs = [basicPayInput, overtimePayInput, holidayPayInput, internetAllowanceInput, otherBonusesInput];
-    const deductionInputs = [sssDeductionInput, philhealthDeductionInput, hdmfDeductionInput];
 
     compensationInputs.forEach(input => input.addEventListener('input', updateGrossValues));
     deductionInputs.forEach(input => input.addEventListener('input', updateTotalNetPay));
@@ -280,16 +321,15 @@
   }
 
 
-    function updateTotalNetPay() {
-        const sssDeduction = Number(sssDeductionInput.value) || 0;
-        const philhealthDeduction = Number(philhealthDeductionInput.value) || 0;
-        const hdmfDeduction = Number(hdmfDeductionInput.value) || 0;
+    // function updateTotalNetPay() {
+    //     const philhealthDeduction = Number(philhealthDeductionInput.value) || 0;
+    //     const hdmfDeduction = Number(hdmfDeductionInput.value) || 0;
 
-        const totalDeductions = sssDeduction + philhealthDeduction + hdmfDeduction;
-        const totalCompensation = // Calculate total compensation here using the same logic as in updateGrossValues() function
+    //     // const totalDeductions = + philhealthDeduction + hdmfDeduction;
+    //     const totalCompensation = // Calculate total compensation here using the same logic as in updateGrossValues() function
 
-        totalNetPaySpan.textContent = (totalCompensation - totalDeductions).toFixed(2);
-    }
+    //     totalNetPaySpan.textContent = (totalCompensation - totalDeductions).toFixed(2);
+    // }
   });
 </script>
 

@@ -80,4 +80,5 @@ function generateEmployeeId() {
   return '0000' + randomNumber.toString();
 }
 
+
 module.exports = mongoose.model('Customer', CustomerSchema);
