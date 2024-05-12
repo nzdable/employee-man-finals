@@ -8,7 +8,7 @@ const SalarySchema = new Schema({
     philhealth: { type: String, required: true },
     hdmf: { type: String, required: true },    
     department: {type: String, required: true},
-    basicPay: { type: Number, required: true },
+
     nightDiff: { type: Number, default: 0 },
     overtimePay: { type: Number, default: 0 },
     holidayPay: { type: Number, default: 0 },
@@ -18,6 +18,8 @@ const SalarySchema = new Schema({
 
     // Added fields
     hoursWorked: { type: Number, default: 0 },
+    basicPay: { type: Number, required: 0 },
+
     regularOvertime: { type: Number, default: 0 },
     regularHoliday: { type: Number, default: 0 },
     specialNonWorkingDay: { type: Number, default: 0 },
@@ -63,12 +65,14 @@ SalarySchema.pre('save', function(next) {
     // Recalculating total compensation to include all components
     this.totalCompensation = this.basicPay + this.nightDiff + this.overtimePay + this.holidayPay + this.internetAllowance + this.otherBonuses + this.attendanceIncentive + this.regularOvertime + this.regularHoliday + this.specialNonWorkingDay + this.holidayOvertime;
     // Optionally calculate gross pay rate, rate per hour etc., here if needed
-    this.grossPayRate = calculateGrossPayRate(this.basicPay);  // Ensure this function is defined or provide logic
+    this.grossPayRate = calculateGrossPayRate(this.hoursWorked);  // Ensure this function is defined or provide logic
     this.grossRatePerHour = this.grossPayRate / (this.hoursWorked || 1); // Prevent division by zero
     this.grossSalaryDollars = this.totalCompensation / exchangeRate;  // Assuming exchange rate is defined
     this.grossSalaryPesos = this.totalCompensation;
     this.totalGrossCompensation = this.totalCompensation + this.internetAllowanceBonuses; // Assuming this field accumulates all bonuses
-    
+    this.basicPay = calculateBasicPay(this.hoursWorked);
+    this.overtimePay = calculateOvertimePay(this.hoursWorked);
+
     this.whDeduction = calculatewhDeduction(this.basicPay);
     this.sssDeduction = calculateSSSDeduction(this.basicPay);
 
@@ -80,9 +84,23 @@ SalarySchema.pre('save', function(next) {
 const Salary = mongoose.model('Salary', SalarySchema);
 module.exports = Salary;
 
+function calculateBasicPay(hoursWorked){
+    return hoursWorked * 54;
+}
+
+function calculateOvertimePay(hoursWorked) {
+    const regularHoursPerMonth = 160;
+    let overtimePay;
+
+    if (hoursWorked > regularHoursPerMonth) {
+        overtimePay = ((hoursWorked - 160) * (0.5*54));
+    } 
+    return overtimePay;
+}
+
 // Define a function to calculate the gross pay rate based on the basic pay
-function calculateGrossPayRate(basicPay) {
-    return basicPay * 1.2;  // Example calculation, adjust as needed
+function calculateGrossPayRate(hoursWorked) {
+    return hoursWorked * 5.10;  // Example calculation, adjust as needed
 }
 
 const exchangeRate = 50; // Adjust the value as needed

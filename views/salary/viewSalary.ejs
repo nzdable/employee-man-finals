@@ -58,6 +58,7 @@
 
 <div class="row" id="row1">
   <div class = "col-6" id="col1">
+    <p><strong>Gross Pay:</strong> <%= salary.grossPay %></p>
     <p><strong>Employee Name:</strong> <%= salary.employeeName %></p>
     <p><strong>TIN No.:</strong> <%= salary.tin %></p>
     <p><strong>SSS No.:</strong> <%= salary.sss %></p>
@@ -140,7 +141,7 @@
     <div class="col" id="col">
       <p><strong>ACTUAL</strong></p>
       <p><%= salary.hoursWorked %></p>
-      <p><%= salary.regularOvertime %></p>
+      <p><%= salary.overtimePay %></p>
       <p><%= salary.regularHoliday %></p>
       <p><%= salary.specialNonWorkingDay %></p>
       <p><%= salary.holidayOvertime %></p>
@@ -152,12 +153,12 @@
 
     <div class="col" id="col">
       <p><strong>FACTOR</strong></p>
-      <p><%= salary.hoursWorked %></p>
-      <p><%= salary.regularOvertime %></p>
-      <p><%= salary.regularHoliday %></p>
-      <p><%= salary.specialNonWorkingDay %></p>
-      <p><%= salary.holidayOvertime %></p>
-      <p><%= salary.serviceIncentiveLeaveCredit %></p>
+      <p>1</p>
+      <p>0.25</p>
+      <p>1</p>
+      <p>0.3</p>
+      <p>0.3</p>
+      <p>0.91</p>
 
     </div>
   
@@ -228,4 +229,3 @@
 
   </div>
 </div>
-

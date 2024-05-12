@@ -1,13 +1,15 @@
 const Salary = require('../models/Salary');
 const Customer = require('../models/Customer');
 
-
-
-function calculateGrossPayRate(basicPay) {
-    return basicPay * 1.2;  // This is a simplistic calculation, adjust as needed
+function calculateBasicPay(hoursWorked){
+    return hoursWorked * 54;
 }
 
-const exchangeRate = 50;  // Example exchange rate for dollar to peso conversion
+function calculateGrossPayRate(basicPay) {
+    return basicPay * 1.2;  
+}
+
+const exchangeRate = 50;  
 
 function calculatewhDeduction(basicPay) {
     let whDeduction;
@@ -75,9 +77,6 @@ function calculateHDMFDeduction(basicPay) {
     return hdmfDeduction;
 }
 
-
-
-
 exports.renderAddSalaryPage = async (req, res) => {
     try {
         const customers = await Customer.find().exec();
@@ -93,12 +92,14 @@ exports.renderAddSalaryPage = async (req, res) => {
 
 exports.addSalary = async (req, res) => {
     const {
-        employeeName, tin, sss, philhealth, hdmf, department, basicPay, nightDiff,
+        employeeName, tin, sss, philhealth, hdmf, department, nightDiff,
         overtimePay, holidayPay, internetAllowance, otherBonuses, attendanceIncentive, createdAt,
         startingCutoff, endingCutoff,
         hoursWorked, regularOvertime, regularHoliday, specialNonWorkingDay, holidayOvertime,
         serviceIncentiveLeaveCredit, sssLoanSalary, sssLoanCalamity, hdmfLoanSalary, hdmfLoanCalamity
     } = req.body;
+
+    const basicPay = calculateBasicPay(hoursWorked);
 
     const sssDeduction = calculateSSSDeduction(basicPay);
     const whDeduction = calculatewhDeduction(basicPay);
@@ -114,8 +115,6 @@ exports.addSalary = async (req, res) => {
     const yearToDateDeductions = totalDeductions; // This also needs to be accumulated over the year
     const yearToDateGrossPay = totalGrossCompensation; // Accumulated gross pay over the year
     const yearToDateNetPay = yearToDateGrossPay - yearToDateDeductions; // Net pay accumulated over the year
-
-
 
     const newSalary = new Salary({
         employeeName, tin, sss, philhealth, hdmf, department,
@@ -153,7 +152,6 @@ exports.viewSalaryList = async (req, res) => {
 exports.editSalary = async (req, res) => {
     const { id } = req.params;
     const salaryUpdates = req.body;
-
     try {
         await Salary.findByIdAndUpdate(id, salaryUpdates);
         res.redirect(`/salary/viewSalary/${id}`);
