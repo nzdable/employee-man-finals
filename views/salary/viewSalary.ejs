@@ -114,42 +114,75 @@
   
 <div class="row" id="row3">
   <div class="col-6" id="col5">
-    <p><strong>Hours Worked:</strong> <%= salary.hoursWorked %></p>
-    <p><strong>Regular Overtime:</strong> <%= salary.regularOvertime %></p>
-    <p><strong>Regular Holiday:</strong> <%= salary.regularHoliday %></p>
-    <p><strong>Special Non-Working Day:</strong> <%= salary.specialNonWorkingDay %></p>
-    <p><strong>Holiday Overtime:</strong> <%= salary.holidayOvertime %></p>
-    <p><strong>Service Incentive Leave Credit:</strong> <%= salary.serviceIncentiveLeaveCredit %></p>
-    <p>------------------------------------------</p>
-    <p><strong>Gross Pay Rate:</strong> <%= salary.grossPayRate %></p>
-    <p><strong>Gross Rate per Hour:</strong> <%= salary.grossRatePerHour %></p>
-    <p><strong>Gross Salary Dollars:</strong> <%= salary.grossSalaryDollars %></p>
-    <p><strong>Gross Salary Pesos:</strong> <%= salary.grossSalaryPesos %></p>
-    <p><strong>Internet Allowance and Bonuses:</strong> <%= salary.internetAllowanceBonuses %></p>
-    <p>------------------------------------------</p>
-    <p><strong>Total Gross Compensation:</strong> <%= salary.totalGrossCompensation %></p>
+
   </div>
 
-  <div class="col-6" id="col6">
-    <p><strong>ACTUAL</strong></p>
-    <p><%= salary.hoursWorked %></p>
+  <div class="row form-group mb-4">
+
+    <div class="col" id="col">
+      <p>-</p>
+      <p><strong>Hours Worked:</strong></p>
+      <p><strong>Regular Overtime:</strong></p>
+      <p><strong>Regular Holiday:</strong> </p>
+      <p><strong>Special Non-Working Day:</strong> </p>
+      <p><strong>Holiday Overtime:</strong> </p>
+      <p><strong>Service Incentive Leave Credit:</strong> </p>
+      <p> - </p>
+      <p><strong>Gross Pay Rate:</strong> </p>
+      <p><strong>Gross Rate per Hour:</strong></p>
+      <p><strong>Gross Salary Dollars:</strong> </p>
+      <p><strong>Gross Salary Pesos:</strong> </p>
+      <p><strong>Internet Allowance and Bonuses:</strong> </p>
+      <p>-</p>
+      <p><strong>Total Gross Compensation:</strong> </p>
+    </div>
+
+    <div class="col" id="col">
+      <p><strong>ACTUAL</strong></p>
+      <p><%= salary.hoursWorked %></p>
+      <p><%= salary.regularOvertime %></p>
+      <p><%= salary.regularHoliday %></p>
+      <p><%= salary.specialNonWorkingDay %></p>
+      <p><%= salary.holidayOvertime %></p>
+      <p><%= salary.serviceIncentiveLeaveCredit %></p>
+
+
+      
+    </div>
+
+    <div class="col" id="col">
+      <p><strong>FACTOR</strong></p>
+      <p><%= salary.hoursWorked %></p>
+      <p><%= salary.regularOvertime %></p>
+      <p><%= salary.regularHoliday %></p>
+      <p><%= salary.specialNonWorkingDay %></p>
+      <p><%= salary.holidayOvertime %></p>
+      <p><%= salary.serviceIncentiveLeaveCredit %></p>
+
+    </div>
+  
+    <div class="col" id="col">
+      <p><strong>HOURLY RATE</strong></p>
+      <p> - </p>
+      <p> - </p>
+      <p> - </p>
+      <p> - </p>
+      <p> - </p>
+      <p> - </p>
+      <p>------------------------------------------</p>
+      <p><%= salary.grossPayRate %></p>
+      <p> <%= salary.grossRatePerHour %></p>
+      <p><%= salary.grossSalaryDollars %></p>
+      <p><%= salary.grossSalaryPesos %></p>
+      <p> <%= salary.internetAllowanceBonuses %></p>
+      <p>------------------------------------------</p>
+      <p><%= salary.totalGrossCompensation %></p>
+    </div>
   </div>
 
-  <div class="col-6" id="col7">
-    <p><strong>HOURS WORKED</strong></p>
-    <p><%= salary.hoursWorked %></p>
   </div>
 
-  <div class="col-6" id="col8">
-    <p><strong>FACTOR</strong></p>
-    <p><%= salary.hoursWorked %></p>
-  </div>
 
-  <div class="col-6" id="col9">
-    <p><strong>HOURLY RATE</strong></p>
-    <p><%= salary.hoursWorked %></p>
-  </div>
-</div>
 
 <div class="row4">
   <div class="row">
