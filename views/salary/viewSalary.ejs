@@ -58,7 +58,6 @@
 
 <div class="row" id="row1">
   <div class = "col-6" id="col1">
-    <p><strong>Gross Pay:</strong> <%= salary.grossPay %></p>
     <p><strong>Employee Name:</strong> <%= salary.employeeName %></p>
     <p><strong>TIN No.:</strong> <%= salary.tin %></p>
     <p><strong>SSS No.:</strong> <%= salary.sss %></p>
@@ -80,7 +79,7 @@
     <div class="row" id="row2">
       <div class="col-6" id="col3">
         <p><b>COMPENSATION</b></p>
-        <p><strong>Basic Pay:</strong> <%= salary.basicPay %></p>
+        <p><strong>Basic Pay:</strong> <%= salary.totalGrossCompensation %></p>
         <p><strong>Night Differential:</strong> <%= salary.nightDiff %></p>
         <p><strong>Overtime Pay:</strong> <%= salary.overtimePay %></p>
         <p><strong>Holiday Pay:</strong> <%= salary.holidayPay %></p>
@@ -90,9 +89,9 @@
         <p><strong>Attendance Incentive:</strong> <%= salary.attendanceIncentive %></p>
         <p><strong>Other Bonuses:</strong> <%= salary.otherBonuses %></p>
         <p>-------------------------</p>
-        <p><strong>Total Compensation:</strong> <%= salary.totalCompensation %></p>
+        <p><strong>Total Compensation:</strong> <%= salary.totalGrossCompensation + salary.nightDiff + salary.overtimePay + salary.holidayPay +  salary.internetAllowance%></p>
         <br>
-        <p><strong>Total Net Pay:</strong> <%= salary.totalNetPay %></p>
+        <p><strong>Total Net Pay:</strong> <%= salary.totalGrossCompensation + salary.nightDiff + salary.overtimePay + salary.holidayPay +  salary.internetAllowance - salary.totalDeductions%></p>
         </p>
         <br>
       </div>
@@ -164,20 +163,20 @@
   
     <div class="col" id="col">
       <p><strong>HOURLY RATE</strong></p>
-      <p> - </p>
-      <p> - </p>
-      <p> - </p>
-      <p> - </p>
-      <p> - </p>
-      <p> - </p>
+      <p>$<%= salary.hourlyHoursWorked %></p>
+      <p>$<%= salary.hourlyOvertime %></p>
+      <p>$<%= salary.hourlyHoliday %></p>
+      <p>$<%= salary.hourlyNonWorkHoliday %></p>
+      <p>$<%= salary.hourlyHolidayOvertime %></p>
+      <p>$<%= salary.hourlySILC %></p>
       <p>------------------------------------------</p>
-      <p><%= salary.grossPayRate %></p>
-      <p> <%= salary.grossRatePerHour %></p>
-      <p><%= salary.grossSalaryDollars %></p>
-      <p><%= salary.grossSalaryPesos %></p>
-      <p> <%= salary.internetAllowanceBonuses %></p>
+      <p>$<%= salary.grossPayRate %></p>
+      <p>$<%= salary.grossRatePerHour %></p>
+      <p>$<%= salary.grossSalaryDollars %></p>
+      <p>₱<%= salary.grossSalaryPesos %></p>
+      <p>₱<%= salary.internetAllowanceBonuses %></p>
       <p>------------------------------------------</p>
-      <p><%= salary.totalGrossCompensation %></p>
+      <p>₱<%= salary.totalGrossCompensation %></p>
     </div>
   </div>
 

@@ -1,13 +1,29 @@
 const Salary = require('../models/Salary');
 const Customer = require('../models/Customer');
 
+function calculateHourlyHoursWorked(hoursWorked) {
+    return hoursWorked * 1;
+}
+function calculateHourlyOvertime(regularOvertime) {
+    return regularOvertime * 0.25;
+}
+function calculateHourlyHoliday(regularHoliday) {
+    return regularHoliday * 1;
+}
+function calculateHourlyNonWorkHoliday(specialNonWorkingDay){
+    return specialNonWorkingDay * 0.3;
+}
+function calculateHourlyHolidayOvertime(holidayOvertime){
+    return holidayOvertime * 0.3;
+}
+function calculateHourlySILC(serviceIncentiveLeaveCredit){
+    return serviceIncentiveLeaveCredit * 0.91;
+}
 function calculateBasicPay(hoursWorked){
     return hoursWorked * 54;
 }
 
-function calculateGrossPayRate(basicPay) {
-    return basicPay * 1.2;  
-}
+
 
 const exchangeRate = 50;  
 
@@ -99,6 +115,14 @@ exports.addSalary = async (req, res) => {
         serviceIncentiveLeaveCredit, sssLoanSalary, sssLoanCalamity, hdmfLoanSalary, hdmfLoanCalamity
     } = req.body;
 
+    const hourlyHoursWorked = calculateHourlyHoursWorked(hoursWorked);
+    const hourlyOvertime = calculateHourlyOvertime(regularOvertime);
+    const hourlyHoliday = calculateHourlyHoliday(regularHoliday);
+    const hourlyNonWorkHoliday = calculateHourlyNonWorkHoliday(specialNonWorkingDay);
+    const hourlyHolidayOvertime = calculateHourlyHolidayOvertime(holidayOvertime);
+    const hourlySILC = calculateHourlySILC(serviceIncentiveLeaveCredit);
+
+
     const basicPay = calculateBasicPay(hoursWorked);
 
     const sssDeduction = calculateSSSDeduction(basicPay);
@@ -106,7 +130,7 @@ exports.addSalary = async (req, res) => {
     const philhealthDeduction = calculatePhilHealthDeduction(basicPay);
     const hdmfDeduction = calculateHDMFDeduction(basicPay);
 
-    const grossPayRate = calculateGrossPayRate(basicPay);
+    const grossPayRate = hourlyHoursWorked + hourlyOvertime + hourlyHoliday + hourlyNonWorkHoliday + hourlyHolidayOvertime + hourlySILC;
     const grossSalaryDollars = (basicPay + nightDiff + overtimePay + holidayPay + internetAllowance + otherBonuses) / exchangeRate;
     const grossSalaryPesos = basicPay + nightDiff + overtimePay + holidayPay + internetAllowance + otherBonuses;
     const totalGrossCompensation = basicPay + nightDiff + overtimePay + holidayPay + internetAllowance + otherBonuses + attendanceIncentive + regularOvertime + regularHoliday + specialNonWorkingDay + holidayOvertime;
@@ -118,7 +142,7 @@ exports.addSalary = async (req, res) => {
 
     const newSalary = new Salary({
         employeeName, tin, sss, philhealth, hdmf, department,
-        basicPay, nightDiff, overtimePay, holidayPay, internetAllowance,
+        basicPay, nightDiff, overtimePay, holidayPay, internetAllowance, hourlyHoursWorked, hourlyOvertime, hourlyHoliday, hourlyNonWorkHoliday, hourlyHolidayOvertime, hourlySILC,
         otherBonuses, attendanceIncentive, whDeduction, sssDeduction, philhealthDeduction,
         hdmfDeduction, sssLoanSalary, sssLoanCalamity, hdmfLoanSalary, hdmfLoanCalamity, createdAt, payrollDate: new Date(), startingCutoff, endingCutoff,
         hoursWorked, regularOvertime, regularHoliday, specialNonWorkingDay, holidayOvertime,

@@ -57,21 +57,39 @@ const SalarySchema = new Schema({
     createdAt: { type: Date, default: Date.now },
     payrollDate: { type: Date, default: Date.now },
     startingCutoff: { type: Date, default: Date.now },
-    endingCutoff: { type: Date, default: Date.now }
+    endingCutoff: { type: Date, default: Date.now },
+
+    // Hourly rates
+    hourlyHoursWorked: { type: Number, default: 0 },
+    hourlyOvertime: { type: Number, default: 0 },
+    hourlyHoliday: { type: Number, default: 0},
+    hourlyNonWorkHoliday: { type: Number, default: 0},
+    hourlyHolidayOvertime: { type: Number, default: 0},
+    hourlySILC: {type: Number, default: 0}
+
 });
 
-// Pre-save middleware to calculate total compensation and net pay
+// PRE-SAVE MIDDLEWARE
 SalarySchema.pre('save', function(next) {
     // Recalculating total compensation to include all components
     this.totalCompensation = this.basicPay + this.nightDiff + this.overtimePay + this.holidayPay + this.internetAllowance + this.otherBonuses + this.attendanceIncentive + this.regularOvertime + this.regularHoliday + this.specialNonWorkingDay + this.holidayOvertime;
     // Optionally calculate gross pay rate, rate per hour etc., here if needed
-    this.grossPayRate = calculateGrossPayRate(this.hoursWorked);  // Ensure this function is defined or provide logic
-    this.grossRatePerHour = this.grossPayRate / (this.hoursWorked || 1); // Prevent division by zero
-    this.grossSalaryDollars = this.totalCompensation / exchangeRate;  // Assuming exchange rate is defined
-    this.grossSalaryPesos = this.totalCompensation;
-    this.totalGrossCompensation = this.totalCompensation + this.internetAllowanceBonuses; // Assuming this field accumulates all bonuses
+    
+    // Hourly Rate
+    this.hourlyHoursWorked = calculateHourlyHoursWorked(this.hoursWorked);
+    this.hourlyOvertime = calculateHourlyOvertime(this.regularOvertime);
+    this.hourlyHoliday = calculateHourlyHoliday(this.regularHoliday);
+    this.hourlyNonWorkHoliday = calculateHourlyNonWorkHoliday(this.specialNonWorkingDay);
+    this.hourlyHolidayOvertime = calculateHourlyHolidayOvertime(this.holidayOvertime);
+    this.hourlySILC = calculateHourlySILC(this.serviceIncentiveLeaveCredit);
+
+    this.grossPayRate = this.hourlyHoursWorked + this.hourlyOvertime + this.hourlyHoliday + this.hourlyNonWorkHoliday + this.hourlyHolidayOvertime + this.hourlySILC;  // Ensure this function is defined or provide logic
+    this.grossRatePerHour = 5.10; // Prevent division by zero
+    this.grossSalaryDollars = this.grossPayRate * this.grossRatePerHour;  // Assuming exchange rate is defined
+    this.grossSalaryPesos = this.grossSalaryDollars * exchangeRate;
+    this.totalGrossCompensation = this.grossSalaryPesos + this.internetAllowanceBonuses; // Assuming this field accumulates all bonuses
     this.basicPay = calculateBasicPay(this.hoursWorked);
-    this.overtimePay = calculateOvertimePay(this.hoursWorked);
+    
 
     this.whDeduction = calculatewhDeduction(this.basicPay);
     this.sssDeduction = calculateSSSDeduction(this.basicPay);
@@ -84,24 +102,30 @@ SalarySchema.pre('save', function(next) {
 const Salary = mongoose.model('Salary', SalarySchema);
 module.exports = Salary;
 
+function calculateHourlyHoursWorked(hoursWorked) {
+    return hoursWorked * 1;
+}
+function calculateHourlyOvertime(regularOvertime) {
+    return regularOvertime * 0.25;
+}
+function calculateHourlyHoliday(regularHoliday) {
+    return regularHoliday * 1;
+}
+function calculateHourlyNonWorkHoliday(specialNonWorkingDay){
+    return specialNonWorkingDay * 0.3;
+}
+function calculateHourlyHolidayOvertime(holidayOvertime){
+    return holidayOvertime * 0.3;
+}
+function calculateHourlySILC(serviceIncentiveLeaveCredit){
+    return serviceIncentiveLeaveCredit * 0.91;
+}
 function calculateBasicPay(hoursWorked){
     return hoursWorked * 54;
 }
 
-function calculateOvertimePay(hoursWorked) {
-    const regularHoursPerMonth = 160;
-    let overtimePay;
-
-    if (hoursWorked > regularHoursPerMonth) {
-        overtimePay = ((hoursWorked - 160) * (0.5*54));
-    } 
-    return overtimePay;
-}
 
 // Define a function to calculate the gross pay rate based on the basic pay
-function calculateGrossPayRate(hoursWorked) {
-    return hoursWorked * 5.10;  // Example calculation, adjust as needed
-}
 
 const exchangeRate = 50; // Adjust the value as needed
 
