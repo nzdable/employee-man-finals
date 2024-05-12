@@ -1,42 +1,31 @@
 const Salary = require('../models/Salary');
 const Customer = require('../models/Customer');
-// const PDFDocument = require('pdfkit');
-// const blobStream = require('blob-stream');
 
-// Function to calculate the Basic Daily Rate
-// const calculateBasicDailyRate = (monthlyRate) => {
-//     const numberOfMonthsInYear = 12;
-//     const totalWorkingDaysInYear = 260; // Assuming 260 working days in a year
-//     return (monthlyRate * numberOfMonthsInYear) / totalWorkingDaysInYear;
-//   };
-  
-// // Function to calculate various rates based on the Basic Daily Rate
-// const calculateRates = (basicDailyRate) => {
-//     return {
-//       specialDayRate: basicDailyRate * 1.3,
-//       specialDayRestDayRate: basicDailyRate * 1.5,
-//       regularHolidayRate: basicDailyRate * 2,
-//       regularHolidayRestDayRate: basicDailyRate * 2.6,
-//     };
-//   };  
-  
-// // Function to calculate deductions for absences and tardiness
-// const calculateDeductions = (basicDailyRate, absences, tardinessHours) => {
-// const hourlyRate = basicDailyRate / 8; // Assuming 8 working hours per day
-// const absencesDeduction = hourlyRate * 8 * absences; // Assuming 8 hours per day
-// const tardinessDeduction = hourlyRate * tardinessHours;
-//     return {
-//       absencesDeduction,
-//       tardinessDeduction,
-//     };
-//   };
 
-/// Example function to calculate the gross pay rate based on the basic pay
+
 function calculateGrossPayRate(basicPay) {
     return basicPay * 1.2;  // This is a simplistic calculation, adjust as needed
 }
 
 const exchangeRate = 50;  // Example exchange rate for dollar to peso conversion
+
+function calculatewhDeduction(basicPay) {
+    let whDeduction;
+    if (basicPay <= 20833) {
+        whDeduction = basicPay * 0;  // No tax for basic pay up to 20,833
+    } else if (basicPay <= 33332) {
+        whDeduction = basicPay * 0.15;  // 15% tax for basic pay between 20,834 and 33,332
+    } else if (basicPay <= 66666) {
+        whDeduction = basicPay * 0.20;  // 20% tax for basic pay between 33,333 and 66,666
+    } else if (basicPay <= 166666) {
+        whDeduction = basicPay * 0.25;  // 25% tax for basic pay between 66,667 and 166,666
+    } else if (basicPay <= 666666) {
+        whDeduction = basicPay * 0.30;  // 30% tax for basic pay between 166,667 and 666,666
+    } else {
+        whDeduction = basicPay * 0.35;  // 35% tax for basic pay above 666,667
+    }
+    return whDeduction;
+}
 
 exports.renderAddSalaryPage = async (req, res) => {
     try {
@@ -69,6 +58,7 @@ exports.addSalary = async (req, res) => {
     const yearToDateDeductions = totalDeductions; // This also needs to be accumulated over the year
     const yearToDateGrossPay = totalGrossCompensation; // Accumulated gross pay over the year
     const yearToDateNetPay = yearToDateGrossPay - yearToDateDeductions; // Net pay accumulated over the year
+    const whDeduction = calculatewhDeduction(basicPay);
 
     const newSalary = new Salary({
         employeeName, tin, sss, philhealth, hdmf,

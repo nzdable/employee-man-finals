@@ -39,6 +39,7 @@ const SalarySchema = new Schema({
     yearToDateGrossPay: { type: Number, default: 0 },
     yearToDateNetPay: { type: Number, default: 0 },
     // Deductions
+    whDeduction: { type: Number, default: 0 },
     sssDeduction: { type: Number, default: 0 },
     philhealthDeduction: { type: Number, default: 0 },
     hdmfDeduction: { type: Number, default: 0 },
@@ -46,6 +47,7 @@ const SalarySchema = new Schema({
     totalCompensation: { type: Number, default: 0 },
     totalDeductions: { type: Number, default: 0 },
     totalNetPay: { type: Number, default: 0 },
+
     // Dates
     payrollDate: { type: Date, default: Date.now },
     startingCutoff: { type: Date, default: Date.now },
@@ -62,6 +64,8 @@ SalarySchema.pre('save', function(next) {
     this.grossSalaryDollars = this.totalCompensation / exchangeRate;  // Assuming exchange rate is defined
     this.grossSalaryPesos = this.totalCompensation;
     this.totalGrossCompensation = this.totalCompensation + this.internetAllowanceBonuses; // Assuming this field accumulates all bonuses
+    
+    this.whDeduction = this.calculatewhDeduction(this.basicPay);
 
     this.totalDeductions = this.sssDeduction + this.philhealthDeduction + this.hdmfDeduction;
     this.totalNetPay = this.totalCompensation - this.totalDeductions;
@@ -70,3 +74,24 @@ SalarySchema.pre('save', function(next) {
 
 const Salary = mongoose.model('Salary', SalarySchema);
 module.exports = Salary;
+
+
+// Define the calculateWHTax function
+function calculatewhDeduction(basicPay) {
+    let whDeduction;
+    if (basicPay <= 20833) {
+        whDeduction = basicPay * 0;  // No tax for basic pay up to 20,833
+    } else if (basicPay <= 33332) {
+        whDeduction = basicPay * 0.15;  // 15% tax for basic pay between 20,834 and 33,332
+    } else if (basicPay <= 66666) {
+        whDeduction = basicPay * 0.20;  // 20% tax for basic pay between 33,333 and 66,666
+    } else if (basicPay <= 166666) {
+        whDeduction = basicPay * 0.25;  // 25% tax for basic pay between 66,667 and 166,666
+    } else if (basicPay <= 666666) {
+        whDeduction = basicPay * 0.30;  // 30% tax for basic pay between 166,667 and 666,666
+    } else {
+        whDeduction = basicPay * 0.35;  // 35% tax for basic pay above 666,667
+    }
+    return whDeduction;
+}
+
