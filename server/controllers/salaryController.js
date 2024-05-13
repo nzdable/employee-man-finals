@@ -69,17 +69,7 @@ function calculateSSSDeduction(basicPay) {
 
 function calculatePhilHealthDeduction(basicPay) {
     let philhealthDeduction;
-    if (basicPay <= 10000) {
-        philhealthDeduction = basicPay * 0.0275;  // 2.75% contribution for basic pay up to 10,000
-    } else if (basicPay <= 40000) {
-        philhealthDeduction = basicPay * 0.035;   // 3.5% contribution for basic pay between 10,001 and 40,000
-    } else if (basicPay <= 60000) {
-        philhealthDeduction = basicPay * 0.0425;  // 4.25% contribution for basic pay between 40,001 and 60,000
-    } else if (basicPay <= 70000) {
-        philhealthDeduction = basicPay * 0.05;    // 5% contribution for basic pay between 60,001 and 70,000
-    } else {
-        philhealthDeduction = basicPay * 0.055;   // 5.5% contribution for basic pay above 70,000
-    }
+    philhealthDeduction = basicPay * 0.05;
     return philhealthDeduction;
 }
 

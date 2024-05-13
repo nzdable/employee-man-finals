@@ -70,7 +70,7 @@
     <p><strong>Payroll Date:</strong> <%= salary.payrollDate %></p>
     <p><strong>Pay Period:</strong> <%= salary.startingCutoff.toDateString() %> to <%= salary.endingCutoff.toDateString() %> </p>
     <p><strong>Department: </strong><%= salary.department %></p>
-    <p><strong>Date of Hire: </strong><%= salary.dateOfHire %> </p>
+    <p><strong>Date of Hire: </strong><%= salary.createdAt %> </p>
     <p><strong>Net Hourly Rate Of: </strong> </p>
     <br>
   </div>
@@ -188,36 +188,31 @@
   <div class="row">
     <div class="col-6" id="col10">
       <p><b>YEAR TO DATE COMPENSATION</b></p>
-      <p><strong>Basic Pay:</strong> </p>
-      <p><strong>Night Differential:</strong> </p>
-      <p><strong>Overtime Pay:</strong> </p>
-      <p><strong>Holiday Pay:</strong> </p>
-      <p><strong>Internet Allowance:</strong> </p>
-      <p><strong>Attendance Incentive:</strong> </p>
-      <p><strong>Other Bonuses:</strong> </p>
+      <p><strong>Basic Pay:</strong> <%= 2 * salary.totalGrossCompensation %></p>
+      <p><strong>Night Differential:</strong> <%= 2 * salary.nightDiff %></p>
+      <p><strong>Overtime Pay:</strong> <%= 2 * salary.overtimePay %></p>
+      <p><strong>Holiday Pay:</strong> <%= 2 * salary.holidayPay %></p>
+      <p><strong>Internet Allowance:</strong> <%= 2 * salary.internetAllowance %></p>
+      <p><strong>Attendance Incentive:</strong> <%= 2 * salary.attendanceIncentive %></p>
+      <p><strong>Other Bonuses:</strong> <%= 2 * salary.otherBonuses %></p>
       <br><br><br>
-      <p><strong>Year To Date Compensation:</strong> <%= salary.yearToDateCompensation %></p>
-      <p><strong>Year To Date Deductions:</strong> <%= salary.yearToDateDeductions %></p>
-      <p><strong>Year To Date Gross Pay:</strong> <%= salary.yearToDateGrossPay %></p>
-      <p><strong>Year To Date Net Pay:</strong> <%= salary.yearToDateNetPay %></p>
+      <p><strong>Year To Date Gross Pay:</strong> <%= 2 * (salary.totalGrossCompensation + salary.nightDiff + salary.overtimePay + salary.holidayPay +  salary.internetAllowance) %></p>
+      <p><strong>Year To Date Net Pay:</strong> <%= (2 * (salary.totalGrossCompensation + salary.nightDiff + salary.overtimePay + salary.holidayPay +  salary.internetAllowance)) - (2 * salary.totalDeductions) %></p>
       </p>
     </div>
 
     <div class="col-6" id="col11">
       <p><b>YEAR TO DATE DEDUCTIONS</b></p>
-      <p><strong>Withholding tax:</strong> </p>
-      <p><strong>SSS:</strong> </p>
-      <p><strong>PhilHealth:</strong> </p>
-      <p><strong>HDMF:</strong> </p>
-      <p><strong>SSS Loan Salary:</strong> </p>
-      <p><strong>SSS Loan Calamity:</strong> </p>
-      <p><strong>HMDF Loan Salary:</strong> </p>
-      <p><strong>HDMF Loan Calamity:</strong> </p>
+      <p><strong>Withholding tax:</strong> <%= 2 * salary.whDeduction %></p>
+      <p><strong>SSS:</strong> <%= 2 * salary.sssDeduction %></p>
+      <p><strong>PhilHealth:</strong><%= 2 * salary.philhealthDeduction %> </p>
+      <p><strong>HDMF:</strong> <%= salary.hdmfDeduction %></p>
+      <p><strong>SSS Loan Salary:</strong> <%= 2 * salary.sssLoanSalary %> </p>
+      <p><strong>SSS Loan Calamity:</strong> <%=2 * salary.sssLoanCalamity %> </p>
+      <p><strong>HMDF Loan Salary:</strong> <%= 2 * salary.hdmfLoanSalary %></p>
+      <p><strong>HDMF Loan Calamity:</strong> <%= 2 * salary.hdmfLoanCalamity %></p>
       <br><br><br>
-      <p><strong>Year To Date Compensation:</strong> <%= salary.yearToDateCompensation %></p>
-      <p><strong>Year To Date Deductions:</strong> <%= salary.yearToDateDeductions %></p>
-      <p><strong>Year To Date Gross Pay:</strong> <%= salary.yearToDateGrossPay %></p>
-      <p><strong>Year To Date Net Pay:</strong> <%= salary.yearToDateNetPay %></p>
+      <p><strong>Year To Date Deductions:</strong> <%= 2 * salary.totalDeductions %></p>
       </p>
     </div>
   </div>
