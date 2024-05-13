@@ -19,7 +19,7 @@
       <% salaries.forEach(salary => { %>
         <tr>
           <td><%= salary.employeeName %></td>
-          <td><%= salary.basicPay %></td> <!-- assuming basicPay represents the salary, adjust as necessary -->
+          <td><%= salary.totalGrossCompensation + salary.nightDiff + salary.overtimePay + salary.holidayPay +  salary.internetAllowance - salary.totalDeductions %></td> <!-- assuming basicPay represents the salary, adjust as necessary -->
           <td><%= salary.payrollDate.toDateString() %></td> <!-- format the date for better readability -->
           <td class="text-end">
             <div class="d-flex flex-row justify-content-end gap-2">
