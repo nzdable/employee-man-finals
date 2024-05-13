@@ -13,18 +13,6 @@
   </nav>
 </div>
 
-
-<div class="row form-group mb-4">
-  <div class="col">
-      <label for="startingCutoff">Starting Cutoff Date</label>
-      <input type="date" class="form-control" id="startingCutoff" name="startingCutoff" required>
-  </div>
-  <div class="col">
-      <label for="endingCutoff">Ending Cutoff Date</label>
-      <input type="date" class="form-control" id="endingCutoff" name="endingCutoff" required>
-  </div>
-</div><br><br>
-
 <form id="salaryForm" action="/addSalary" method="POST">
   <div class="row1">
     <h2>EMPLOYEE INFORMATION</h2>
@@ -99,28 +87,6 @@
     </div>
   </div>
 
-
-  <div class="row form-group mb-4">
-    <h2>ADD DEDUCTIONS</h2>
-    <div class="col">
-      <label for="sssLoanSalary">SSS Loan Salary</label>
-      <input type="text" class="form-control" id="sssLoanSalary" name="sssLoanSalary" placeholder="Enter SSS Loan Salary Amount" required>
-    </div>
-
-    <div class="col">
-      <label for="sssLoanCalamity">SSS Loan Calamity</label>
-      <input type="text" class="form-control" id="sssLoanCalamity" name="sssLoanCalamity" placeholder="Enter SSS Loan Calamity Amount" required>
-    </div>
-    <div class="col">
-      <label for="hdmfLoanSalary">HDMF Loan Salary</label>
-      <input type="text" class="form-control" id="hdmfLoanSalary" name="hdmfLoanSalary" placeholder="Enter HMDF Loan Salary Amount" required>
-    </div>
-
-    <div class="col">
-      <label for="hdmfLoanCalamity">HDMF Loan Calamity</label>
-      <input type="text" class="form-control" id="hdmfLoanCalamity" name="hdmfLoanCalamity" placeholder="Enter HDMF Loan Calamity Amount" required>
-    </div>
-  </div><br><br>
 
 
 
@@ -218,6 +184,44 @@
     <span id="grossPayRate" class="form-control">Auto-calculated</span>
   </div>
 </div>
+<br>
+<br>
+
+<div class="row form-group mb-4">
+    <h2>ADD ADDITIONAL DEDUCTIONS</h2>
+    <div class="col">
+      <label for="sssLoanSalary">SSS Loan Salary</label>
+      <input type="text" class="form-control" id="sssLoanSalary" name="sssLoanSalary" placeholder="Enter SSS Loan Salary Amount" required>
+    </div>
+
+    <div class="col">
+      <label for="sssLoanCalamity">SSS Loan Calamity</label>
+      <input type="text" class="form-control" id="sssLoanCalamity" name="sssLoanCalamity" placeholder="Enter SSS Loan Calamity Amount" required>
+    </div>
+    <div class="col">
+      <label for="hdmfLoanSalary">HDMF Loan Salary</label>
+      <input type="text" class="form-control" id="hdmfLoanSalary" name="hdmfLoanSalary" placeholder="Enter HMDF Loan Salary Amount" required>
+    </div>
+
+    <div class="col">
+      <label for="hdmfLoanCalamity">HDMF Loan Calamity</label>
+      <input type="text" class="form-control" id="hdmfLoanCalamity" name="hdmfLoanCalamity" placeholder="Enter HDMF Loan Calamity Amount" required>
+    </div>
+
+
+  </div><br><br>
+
+<div class="row form-group mb-4">
+  <h2>PAYROLL INFORMATION</h2>
+  <div class="col">
+      <label for="startingCutoff">Starting Cutoff Date</label>
+      <input type="date" class="form-control" id="startingCutoff" name="startingCutoff" required>
+  </div>
+  <div class="col">
+      <label for="endingCutoff">Ending Cutoff Date</label>
+      <input type="date" class="form-control" id="endingCutoff" name="endingCutoff" required>
+  </div>
+</div><br><br>
 
 
 
